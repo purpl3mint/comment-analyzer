@@ -129,9 +129,17 @@
     <Content Include="icons\redo.png" />
     <Content Include="icons\saveFile.png" />
     <Content Include="icons\undo.png" />
+    <Content Include="task\analysis.html" />
+    <Content Include="task\books.html" />
+    <Content Include="task\classification.html" />
+    <Content Include="task\diagnostics.html" />
+    <Content Include="task\grammar.html" />
     <Content Include="task\images\automata.png" />
     <Content Include="task\images\automata.xml" />
+    <Content Include="task\source.html" />
     <Content Include="task\states.html" />
+    <Content Include="task\task.html" />
+    <Content Include="task\tests.html" />
     <Content Include="task\transitions.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿namespace comment_analyzer
 {
-    partial class LanguageProcessorForm
+    partial class CommentAnalyzerForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LanguageProcessorForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommentAnalyzerForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.StripMenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuCreate = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,15 +45,15 @@
             this.StripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.текстToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.постановкаЗадачиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.грамматикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.классификацияГрамматикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.методАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.диагностикаИНейтрализацияОшибокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grammarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GrammarClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AnalysisMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DiagnosticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.тестовыйПримерToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.списокЛитературыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.исходныйКодПрограммыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пускToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LiteratureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SourceCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,7 +93,7 @@
             this.StripMenuFile,
             this.StripMenuEdit,
             this.текстToolStripMenuItem,
-            this.пускToolStripMenuItem,
+            this.PlayToolStripMenuItem,
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -234,71 +234,80 @@
             // текстToolStripMenuItem
             // 
             this.текстToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.постановкаЗадачиToolStripMenuItem,
-            this.грамматикаToolStripMenuItem,
-            this.классификацияГрамматикиToolStripMenuItem,
-            this.методАнализаToolStripMenuItem,
-            this.диагностикаИНейтрализацияОшибокToolStripMenuItem,
+            this.taskToolStripMenuItem,
+            this.grammarToolStripMenuItem,
+            this.GrammarClassToolStripMenuItem,
+            this.AnalysisMethodToolStripMenuItem,
+            this.DiagnosticsToolStripMenuItem,
             this.тестовыйПримерToolStripMenuItem,
-            this.списокЛитературыToolStripMenuItem,
-            this.исходныйКодПрограммыToolStripMenuItem});
+            this.LiteratureToolStripMenuItem,
+            this.SourceCodeToolStripMenuItem});
             this.текстToolStripMenuItem.Name = "текстToolStripMenuItem";
             this.текстToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.текстToolStripMenuItem.Text = "Текст";
             // 
-            // постановкаЗадачиToolStripMenuItem
+            // taskToolStripMenuItem
             // 
-            this.постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
-            this.постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.постановкаЗадачиToolStripMenuItem.Text = "Постановка задачи";
+            this.taskToolStripMenuItem.Name = "taskToolStripMenuItem";
+            this.taskToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.taskToolStripMenuItem.Text = "Постановка задачи";
+            this.taskToolStripMenuItem.Click += new System.EventHandler(this.taskToolStripMenuItem_Click);
             // 
-            // грамматикаToolStripMenuItem
+            // grammarToolStripMenuItem
             // 
-            this.грамматикаToolStripMenuItem.Name = "грамматикаToolStripMenuItem";
-            this.грамматикаToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.грамматикаToolStripMenuItem.Text = "Грамматика";
+            this.grammarToolStripMenuItem.Name = "grammarToolStripMenuItem";
+            this.grammarToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.grammarToolStripMenuItem.Text = "Грамматика";
+            this.grammarToolStripMenuItem.Click += new System.EventHandler(this.grammarToolStripMenuItem_Click);
             // 
-            // классификацияГрамматикиToolStripMenuItem
+            // GrammarClassToolStripMenuItem
             // 
-            this.классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
-            this.классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.классификацияГрамматикиToolStripMenuItem.Text = "Классификация грамматики";
+            this.GrammarClassToolStripMenuItem.Name = "GrammarClassToolStripMenuItem";
+            this.GrammarClassToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.GrammarClassToolStripMenuItem.Text = "Классификация грамматики";
+            this.GrammarClassToolStripMenuItem.Click += new System.EventHandler(this.GrammarClassToolStripMenuItem_Click);
             // 
-            // методАнализаToolStripMenuItem
+            // AnalysisMethodToolStripMenuItem
             // 
-            this.методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
-            this.методАнализаToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.методАнализаToolStripMenuItem.Text = "Метод анализа";
+            this.AnalysisMethodToolStripMenuItem.Name = "AnalysisMethodToolStripMenuItem";
+            this.AnalysisMethodToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.AnalysisMethodToolStripMenuItem.Text = "Метод анализа";
+            this.AnalysisMethodToolStripMenuItem.Click += new System.EventHandler(this.AnalysisMethodToolStripMenuItem_Click);
             // 
-            // диагностикаИНейтрализацияОшибокToolStripMenuItem
+            // DiagnosticsToolStripMenuItem
             // 
-            this.диагностикаИНейтрализацияОшибокToolStripMenuItem.Name = "диагностикаИНейтрализацияОшибокToolStripMenuItem";
-            this.диагностикаИНейтрализацияОшибокToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.диагностикаИНейтрализацияОшибокToolStripMenuItem.Text = "Диагностика и нейтрализация ошибок";
+            this.DiagnosticsToolStripMenuItem.Name = "DiagnosticsToolStripMenuItem";
+            this.DiagnosticsToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.DiagnosticsToolStripMenuItem.Text = "Диагностика и нейтрализация ошибок";
+            this.DiagnosticsToolStripMenuItem.Click += new System.EventHandler(this.DiagnosticsToolStripMenuItem_Click);
             // 
             // тестовыйПримерToolStripMenuItem
             // 
             this.тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
             this.тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
             this.тестовыйПримерToolStripMenuItem.Text = "Тестовый пример";
+            this.тестовыйПримерToolStripMenuItem.Click += new System.EventHandler(this.тестовыйПримерToolStripMenuItem_Click);
             // 
-            // списокЛитературыToolStripMenuItem
+            // LiteratureToolStripMenuItem
             // 
-            this.списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
-            this.списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.списокЛитературыToolStripMenuItem.Text = "Список литературы";
+            this.LiteratureToolStripMenuItem.Name = "LiteratureToolStripMenuItem";
+            this.LiteratureToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.LiteratureToolStripMenuItem.Text = "Список литературы";
+            this.LiteratureToolStripMenuItem.Click += new System.EventHandler(this.LiteratureToolStripMenuItem_Click);
             // 
-            // исходныйКодПрограммыToolStripMenuItem
+            // SourceCodeToolStripMenuItem
             // 
-            this.исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
-            this.исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
-            this.исходныйКодПрограммыToolStripMenuItem.Text = "Исходный код программы";
+            this.SourceCodeToolStripMenuItem.Name = "SourceCodeToolStripMenuItem";
+            this.SourceCodeToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.SourceCodeToolStripMenuItem.Text = "Исходный код программы";
+            this.SourceCodeToolStripMenuItem.Click += new System.EventHandler(this.SourceCodeToolStripMenuItem_Click);
             // 
-            // пускToolStripMenuItem
+            // PlayToolStripMenuItem
             // 
-            this.пускToolStripMenuItem.Name = "пускToolStripMenuItem";
-            this.пускToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.пускToolStripMenuItem.Text = "Пуск";
+            this.PlayToolStripMenuItem.Name = "PlayToolStripMenuItem";
+            this.PlayToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.PlayToolStripMenuItem.Text = "Пуск";
+            this.PlayToolStripMenuItem.Click += new System.EventHandler(this.PlayToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -314,14 +323,14 @@
             this.StripMenuHelp.Name = "StripMenuHelp";
             this.StripMenuHelp.ShortcutKeyDisplayString = "F1";
             this.StripMenuHelp.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.StripMenuHelp.Size = new System.Drawing.Size(175, 22);
+            this.StripMenuHelp.Size = new System.Drawing.Size(180, 22);
             this.StripMenuHelp.Text = "Вызов справки";
             this.StripMenuHelp.Click += new System.EventHandler(this.StripMenuHelp_Click);
             // 
             // StripMenuAbout
             // 
             this.StripMenuAbout.Name = "StripMenuAbout";
-            this.StripMenuAbout.Size = new System.Drawing.Size(175, 22);
+            this.StripMenuAbout.Size = new System.Drawing.Size(180, 22);
             this.StripMenuAbout.Text = "О программе";
             this.StripMenuAbout.Click += new System.EventHandler(this.StripMenuAbout_Click);
             // 
@@ -555,7 +564,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "LanguageProcessorForm";
-            this.Text = "Language Processor";
+            this.Text = "Comment Analyzer";
             this.SizeChanged += new System.EventHandler(this.LanguageProcessorForm_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -592,15 +601,15 @@
         private System.Windows.Forms.ToolStripMenuItem StripMenuDelete;
         private System.Windows.Forms.ToolStripMenuItem StripMenuSelectAll;
         private System.Windows.Forms.ToolStripMenuItem текстToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem постановкаЗадачиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem грамматикаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem классификацияГрамматикиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem методАнализаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem диагностикаИНейтрализацияОшибокToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grammarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GrammarClassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AnalysisMethodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DiagnosticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem тестовыйПримерToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem списокЛитературыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem исходныйКодПрограммыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem пускToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LiteratureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SourceCodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PlayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StripMenuHelp;
         private System.Windows.Forms.ToolStripMenuItem StripMenuAbout;

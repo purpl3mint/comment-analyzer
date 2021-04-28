@@ -10,7 +10,7 @@ namespace comment_analyzer
     {
         public static DefaultDialogService dialogService = new DefaultDialogService();
         public static DefaultFileService fileService = new DefaultFileService();
-        public static LanguageProcessorForm mainForm;
+        public static CommentAnalyzerForm mainForm;
         public static string currentData = "";
         public static bool unsaved = false;
         public static Stack<string> undoStack = new Stack<string>();

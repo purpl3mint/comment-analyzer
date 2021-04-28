@@ -16,7 +16,7 @@ namespace comment_analyzer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LanguageProcessorForm());
+            Application.Run(new CommentAnalyzerForm());
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace comment_analyzer
 {
 
-    public partial class LanguageProcessorForm : Form
+    public partial class CommentAnalyzerForm : Form
     {
         //wrappers for elements of form
         public System.Windows.Forms.TextBox TextBox
@@ -33,7 +33,7 @@ namespace comment_analyzer
         }
 
         //form initializer
-        public LanguageProcessorForm()
+        public CommentAnalyzerForm()
         {
             InitializeComponent();
             StaticData.mainForm = this;
@@ -203,7 +203,50 @@ namespace comment_analyzer
             StaticData.commands.CommandCheck();
         }
 
+        private void PlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StaticData.commands.CommandCheck();
+        }
 
+        private void taskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/task.html");
+        }
+
+        private void grammarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/grammar.html");
+        }
+
+        private void GrammarClassToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/classification.html");
+        }
+
+        private void AnalysisMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/analysis.html");
+        }
+
+        private void DiagnosticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/diagnostics.html");
+        }
+
+        private void тестовыйПримерToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/test.html");
+        }
+
+        private void LiteratureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/books.html");
+        }
+
+        private void SourceCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(null, "../../task/source.html");
+        }
     }
 
 
