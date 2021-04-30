@@ -52,16 +52,17 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Automata.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="DefaultDialogService.cs" />
     <Compile Include="DefaultFileService.cs" />
     <Compile Include="IDialogService.cs" />
     <Compile Include="IFileService.cs" />
-    <Compile Include="LanguageProcessorForm.cs">
+    <Compile Include="CommentAnalyzerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LanguageProcessorForm.Designer.cs">
-      <DependentUpon>LanguageProcessorForm.cs</DependentUpon>
+    <Compile Include="CommentAnalyzerForm.Designer.cs">
+      <DependentUpon>CommentAnalyzerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,8 +76,8 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LanguageProcessorForm.resx">
-      <DependentUpon>LanguageProcessorForm.cs</DependentUpon>
+    <EmbeddedResource Include="CommentAnalyzerForm.resx">
+      <DependentUpon>CommentAnalyzerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

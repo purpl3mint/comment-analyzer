@@ -214,32 +214,53 @@ namespace comment_analyzer
 
         public void CommandCheck()
         {
-            string[] strings = StaticData.mainForm.TextBox.Text.Split('\n');
+            string[] errors = { "Ошибок не обнаружено",
+                                "Пустая строка",
+                                "Строка не является комментарием(начинается не с символа *)"};
+            string warning = "Обнаружена последовательность символов не из алфавита '";
 
+            int line = 0;
+            int status = 0;
+            bool hasErrors = false;
+
+            string[] strings = StaticData.mainForm.TextBox.Text.Split('\n');
             for (int i = 0; i < strings.Length; i++)
             {
                 strings[i] = strings[i].TrimEnd('\r');
             }
 
+            List<string> wrongSymbols = new List<string>();
+            Automata automata = new Automata();
+
             StaticData.mainForm.ResultsTextBox.Text = "";
 
-            for (int i = 0; i < strings.Length; i++)
+            for (line = 0; line < strings.Length; line++)
             {
-                int lineStatus = checkExpression(strings[i]);
-                if (lineStatus == -1)
+                status = automata.analyzeLine(strings[line], ref wrongSymbols);
+
+                if(status >= 3)
                 {
-                    StaticData.mainForm.ResultsTextBox.Text += "Line " + (i + 1) + ": CORRECT" + Environment.NewLine;
+                    for(int j = 0; wrongSymbols.Count > j; j++)
+                    {
+                        StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Предупреждение] " +
+                            warning + wrongSymbols[j] + "'" + Environment.NewLine;
+                    }
+                    status -= 3;
+                    wrongSymbols.Clear();
                 }
-                else if (lineStatus == -2)
+                if (status != 0)
                 {
-                    StaticData.mainForm.ResultsTextBox.Text += "Line " + (i + 1) + ": PROCESSING ERROR, very big expression" + Environment.NewLine;
+                    StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Ошибка] " +
+                            errors[status] + Environment.NewLine;
+                    hasErrors = true;
                 }
-                else
-                {
-                    StaticData.mainForm.ResultsTextBox.Text += "Line " + (i + 1) + ": SYNTAX ERROR, wrong command at position " + lineStatus + Environment.NewLine;
-                }
+
             }
 
+            if (!hasErrors)
+            {
+                StaticData.mainForm.ResultsTextBox.Text += "Ошибок не обнаружено" +  Environment.NewLine;
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace comment_analyzer
 {
-    class Automata
+    public class Automata
     {
         public bool isSplitter(char symbol)
         {
@@ -35,7 +35,7 @@ namespace comment_analyzer
 
         public bool isFromGrammar(char symbol)
         {
-            if (char.IsLetterOrDigit(symbol) || isSplitter(symbol))
+            if (char.IsLetterOrDigit(symbol) || isSplitter(symbol) || symbol == '*')
                 return true;
             return false;
         }
@@ -62,10 +62,10 @@ namespace comment_analyzer
                 {
                     wrongSymbolIsFound = true;
                     int j = 1;
-                    while (!isFromGrammar(input[i]) && input.Length >= i + j)
+                    while (input.Length > i + j && !isFromGrammar(input[i+j]))
                         j++;
-                    errors.Add(input.Substring(i, j - 1));
-                    i += j - 2;
+                    errors.Add(input.Substring(i, j));
+                    i += j - 1;
                 }
             }
 
