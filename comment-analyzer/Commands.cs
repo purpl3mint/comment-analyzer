@@ -230,23 +230,25 @@ namespace comment_analyzer
             }
 
             List<string> wrongSymbols = new List<string>();
+            List<int> wrongPositions = new List<int>();
             Automata automata = new Automata();
 
             StaticData.mainForm.ResultsTextBox.Text = "";
 
             for (line = 0; line < strings.Length; line++)
             {
-                status = automata.analyzeLine(strings[line], ref wrongSymbols);
+                status = automata.analyzeLine(strings[line], ref wrongSymbols, ref wrongPositions);
 
                 if(status >= 3)
                 {
                     for(int j = 0; wrongSymbols.Count > j; j++)
                     {
-                        StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Предупреждение] " +
-                            warning + wrongSymbols[j] + "'" + Environment.NewLine;
+                        StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Предуп] " +
+                            warning + wrongSymbols[j] + "'(начало с " + (wrongPositions[j] + 1) + " символа)" + Environment.NewLine;
                     }
                     status -= 3;
                     wrongSymbols.Clear();
+                    wrongPositions.Clear();
                 }
                 if (status != 0)
                 {

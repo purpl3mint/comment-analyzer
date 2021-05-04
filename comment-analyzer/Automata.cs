@@ -40,7 +40,7 @@ namespace comment_analyzer
             return false;
         }
 
-        public int analyzeLine(string input, ref List<string> errors)
+        public int analyzeLine(string input, ref List<string> errors, ref List<int> positions)
         {
             int i = 0;
             int state = 0;
@@ -61,6 +61,7 @@ namespace comment_analyzer
                 else if (!isFromGrammar(input[i]))
                 {
                     wrongSymbolIsFound = true;
+                    positions.Add(i);
                     int j = 1;
                     while (input.Length > i + j && !isFromGrammar(input[i+j]))
                         j++;

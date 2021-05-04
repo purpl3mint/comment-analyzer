@@ -323,14 +323,14 @@
             this.StripMenuHelp.Name = "StripMenuHelp";
             this.StripMenuHelp.ShortcutKeyDisplayString = "F1";
             this.StripMenuHelp.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.StripMenuHelp.Size = new System.Drawing.Size(180, 22);
+            this.StripMenuHelp.Size = new System.Drawing.Size(175, 22);
             this.StripMenuHelp.Text = "Вызов справки";
             this.StripMenuHelp.Click += new System.EventHandler(this.StripMenuHelp_Click);
             // 
             // StripMenuAbout
             // 
             this.StripMenuAbout.Name = "StripMenuAbout";
-            this.StripMenuAbout.Size = new System.Drawing.Size(180, 22);
+            this.StripMenuAbout.Size = new System.Drawing.Size(175, 22);
             this.StripMenuAbout.Text = "О программе";
             this.StripMenuAbout.Click += new System.EventHandler(this.StripMenuAbout_Click);
             // 
@@ -484,6 +484,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -495,6 +496,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -552,7 +554,7 @@
             this.splitContainer1.SplitterDistance = 184;
             this.splitContainer1.TabIndex = 5;
             // 
-            // LanguageProcessorForm
+            // CommentAnalyzerForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -563,7 +565,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MinimumSize = new System.Drawing.Size(800, 500);
-            this.Name = "LanguageProcessorForm";
+            this.Name = "CommentAnalyzerForm";
             this.Text = "Comment Analyzer";
             this.SizeChanged += new System.EventHandler(this.LanguageProcessorForm_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
