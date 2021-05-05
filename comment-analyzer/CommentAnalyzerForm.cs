@@ -235,7 +235,7 @@ namespace comment_analyzer
 
         private void тестовыйПримерToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/test.html");
+            Help.ShowHelp(null, "../../task/tests.html");
         }
 
         private void LiteratureToolStripMenuItem_Click(object sender, EventArgs e)

@@ -26,6 +26,509 @@
 
     <div id="a8">
         <h2>Исходный код программы</h2>
+
+        <div>
+            <h2>Automata.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace comment_analyzer
+{
+    public class Automata
+    {
+        public bool isSplitter(char symbol)
+        {
+            switch (symbol)
+            {
+                case '.': return true;
+                case ',': return true;
+                case '!': return true;
+                case '?': return true;
+                case '(': return true;
+                case ')': return true;
+                case '{': return true;
+                case '}': return true;
+                case '[': return true;
+                case ']': return true;
+                case '+': return true;
+                case '-': return true;
+                case '=': return true;
+                case '\\': return true;
+                case '/': return true;
+                case '<': return true;
+                case '>': return true;
+                default: return false;
+            }
+        }
+
+        public bool isFromGrammar(char symbol)
+        {
+            if (char.IsLetterOrDigit(symbol) || isSplitter(symbol) || symbol == '*')
+                return true;
+            return false;
+        }
+
+        public int analyzeLine(string input, ref List<string> errors, ref List<int> positions)
+        {
+            int i = 0;
+            int state = 0;
+            bool wrongSymbolIsFound = false;
+
+            errors.Clear();
+
+            for (; i < input.Length; i++)
+            {
+                if (input[i] == '*' && state == 0)
+                {
+                    state = 1;
+                }
+                else if (state == 0 && (char.IsLetterOrDigit(input[i]) || isSplitter(input[i])))
+                {
+                    state = 3;
+                }
+                else if (!isFromGrammar(input[i]))
+                {
+                    wrongSymbolIsFound = true;
+                    positions.Add(i);
+                    int j = 1;
+                    while (input.Length > i + j && !isFromGrammar(input[i+j]))
+                        j++;
+                    errors.Add(input.Substring(i, j));
+                    i += j - 1;
+                }
+            }
+
+            if (!wrongSymbolIsFound)
+            {       //в строке все символы были из алфавита
+                if (state == 1)
+                {
+                    return 0;   //правильная строка
+                }
+                else if (i == 0)
+                {
+                    return 1;   //пустая строка
+                }
+                else if (state == 3)
+                {
+                    return 2;   //строка началась не со *
+                }
+            }
+            else
+            {       //в строке попались символы не из алфавита
+                if (state == 1)
+                {
+                    return 3;   //правильная строка
+                }
+                else if (i == 0)
+                {
+                    return 4;   //пустая строка
+                }
+                else if (state == 3)
+                {
+                    return 5;   //строка началась не со *
+                }
+            }
+
+            return 0;
+        }
+    }
+}
+
+            </pre>
+        </div>
+
+        <div>
+            <h2>DefaultDialogServices.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text;
+                using System.Threading.Tasks;
+                using Microsoft.Win32;
+                using System.Windows.Forms;
+                
+                namespace comment_analyzer
+                {
+                    public class DefaultDialogService : IDialogService
+                    {
+                        public string FilePath { get; set; }
+                
+                        public bool OpenFileDialog()
+                        {
+                            OpenFileDialog openFileDialog = new OpenFileDialog();
+                            openFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+                
+                            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                FilePath = openFileDialog.FileName;
+                                return true;
+                            }
+                            return false;
+                        }
+                
+                        public bool SaveFileDialog()
+                        {
+                            SaveFileDialog saveFileDialog = new SaveFileDialog();
+                            saveFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+                
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                FilePath = saveFileDialog.FileName;
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+                
+            </pre>
+        </div>
+
+        <div>
+            <h2>DefaultFileSevice.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text;
+                using System.Threading.Tasks;
+                using System.Windows.Forms;
+                using System.IO;
+                
+                namespace comment_analyzer
+                {
+                    public class DefaultFileService : IFileService
+                    {
+                        public string ReadFile(string filePath)
+                        {
+                            string newData = "";
+                
+                            try
+                            {
+                                using (StreamReader sr = new StreamReader(filePath))
+                                {
+                                    newData = sr.ReadToEnd();
+                                }
+                
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                
+                            return newData;
+                        }
+                        public void SaveFile(string filePath, string data)
+                        {
+                            try
+                            {
+                                using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
+                                {
+                                    sw.WriteLine(data);
+                                }
+                
+                                Console.WriteLine("Запись выполнена");
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                }
+                
+            </pre>
+        </div>
+
+        <div>
+            <h2>IDialogService.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text;
+                using System.Threading.Tasks;
+                
+                namespace comment_analyzer
+                {
+                    interface IDialogService
+                    {
+                        string FilePath { get; set; }   // путь к выбранному файлу
+                        bool OpenFileDialog();  // открытие файла
+                        bool SaveFileDialog();  // сохранение файла
+                    }
+                }
+                
+            </pre>
+        </div>
+
+        <div>
+            <h2>IFileService.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text;
+                using System.Threading.Tasks;
+                
+                namespace comment_analyzer
+                {
+                    interface IFileService
+                    {
+                        string ReadFile(string filePath);
+                        void SaveFile(string filePath, string data);
+                    }
+                }
+                
+            </pre>
+        </div>
+
+        <div>
+            <h2>StaticData.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text;
+                using System.Threading.Tasks;
+                
+                namespace comment_analyzer
+                {
+                    public static class StaticData
+                    {
+                        public static DefaultDialogService dialogService = new DefaultDialogService();
+                        public static DefaultFileService fileService = new DefaultFileService();
+                        public static CommentAnalyzerForm mainForm;
+                        public static string currentData = "";
+                        public static bool unsaved = false;
+                        public static Stack<string> undoStack = new Stack<string>();
+                        public static Stack<string> redoStack = new Stack<string>();
+                        public static Commands commands = new Commands();
+                    }
+                }
+                
+            </pre>
+        </div>
+
+        <div>
+            <h2>Commands.cs</h2>
+            <pre style="font-family: consolas; font-size: 12px;">
+
+                using System;
+                using System.Collections.Generic;
+                using System.Linq;
+                using System.Text;
+                using System.Threading.Tasks;
+                using System.Windows.Forms;
+                
+                namespace comment_analyzer
+                {
+                    public class Commands
+                    {
+                
+                        public void CommandCreate()
+                        {
+                            if (StaticData.unsaved)
+                            {
+                                StaticData.currentData = StaticData.mainForm.TextBox.Text;
+                                var saveBeforeCloseWindow = new SaveBeforeCloseForm();
+                                saveBeforeCloseWindow.ShowDialog();
+                            }
+                
+                            StaticData.dialogService.FilePath = "";
+                            StaticData.currentData = "";
+                            StaticData.mainForm.TextBox.Text = StaticData.currentData;
+                            StaticData.mainForm.Heading = "Language Processor - unnamed";
+                        }
+                
+                        public void CommandOpen()
+                        {
+                            if (StaticData.unsaved)
+                            {
+                                StaticData.currentData = StaticData.mainForm.TextBox.Text;
+                                var saveBeforeCloseWindow = new SaveBeforeCloseForm();
+                                saveBeforeCloseWindow.ShowDialog();
+                            }
+                
+                            StaticData.dialogService.OpenFileDialog();
+                            StaticData.currentData = StaticData.fileService.ReadFile(StaticData.dialogService.FilePath);
+                
+                            StaticData.mainForm.TextBox.Text = StaticData.currentData;
+                
+                            StaticData.mainForm.Heading = "Language Processor";
+                            if (StaticData.dialogService.FilePath != null || StaticData.dialogService.FilePath != "")
+                                StaticData.mainForm.Heading += " - " + StaticData.dialogService.FilePath;
+                            else
+                                StaticData.mainForm.Heading += " - unnamed";
+                
+                            StaticData.unsaved = false;
+                        }
+                
+                        public void CommandSave()
+                        {
+                            StaticData.currentData = StaticData.mainForm.TextBox.Text;
+                
+                            if (StaticData.dialogService.FilePath == null)
+                            {
+                                StaticData.dialogService.SaveFileDialog();
+                                StaticData.fileService.SaveFile(StaticData.dialogService.FilePath, StaticData.currentData);
+                            }
+                            else
+                            {
+                                StaticData.fileService.SaveFile(StaticData.dialogService.FilePath, StaticData.currentData);
+                            }
+                
+                            StaticData.unsaved = false;
+                            StaticData.mainForm.Heading = "Language Processor - " + StaticData.dialogService.FilePath;
+                        }
+                
+                        public void CommandSaveAs()
+                        {
+                            StaticData.currentData = StaticData.mainForm.TextBox.Text;
+                            StaticData.dialogService.SaveFileDialog();
+                            StaticData.fileService.SaveFile(StaticData.dialogService.FilePath, StaticData.currentData);
+                            StaticData.mainForm.Heading = "Language Processor - " + StaticData.dialogService.FilePath;
+                            StaticData.unsaved = false;
+                        }
+                
+                        public void CommandUndo()
+                        {
+                            if (StaticData.undoStack.Count > 0)
+                            {
+                                StaticData.redoStack.Push(StaticData.mainForm.TextBox.Text);
+                                string newValue = StaticData.undoStack.Pop();
+                                StaticData.mainForm.TextBox.Text = newValue;
+                            }
+                        }
+                
+                        public void CommandRedo()
+                        {
+                            if (StaticData.redoStack.Count > 0)
+                            {
+                                StaticData.undoStack.Push(StaticData.mainForm.TextBox.Text);
+                                string newValue = StaticData.redoStack.Pop();
+                                StaticData.mainForm.TextBox.Text = newValue;
+                            }
+                        }
+                
+                        public void CommandCopy()
+                        {
+                            if (StaticData.mainForm.TextBox.SelectionLength > 0)
+                                StaticData.mainForm.TextBox.Copy();
+                        }
+                        public void CommandPaste()
+                        {
+                            if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text) == true)
+                            {
+                                if (StaticData.mainForm.TextBox.SelectionLength > 0)
+                                {
+                                    StaticData.mainForm.TextBox.SelectionStart = StaticData.mainForm.TextBox.SelectionStart + StaticData.mainForm.TextBox.SelectionLength;
+                                }
+                                StaticData.mainForm.TextBox.Paste();
+                            }
+                        }
+                
+                        public void CommandCut()
+                        {
+                            if (StaticData.mainForm.TextBox.SelectedText != "")
+                                StaticData.mainForm.TextBox.Cut();
+                        }
+                
+                        public void CommandDelete()
+                        {
+                            int StartPosDel = StaticData.mainForm.TextBox.SelectionStart;
+                            int LenSelection = StaticData.mainForm.TextBox.SelectionLength;
+                            StaticData.mainForm.TextBox.Text = StaticData.mainForm.TextBox.Text.Remove(StartPosDel, LenSelection);
+                        }
+                
+                        public void CommandSelectAll()
+                        {
+                            StaticData.mainForm.TextBox.SelectAll();
+                        }
+                
+                        public void CommandHelp()
+                        {
+                            Help.ShowHelp(null, "../../help/help1.html");
+                        }
+                
+                        public void CommandCheck()
+                        {
+                            string[] errors = { "Ошибок не обнаружено",
+                                                "Пустая строка",
+                                                "Строка не является комментарием(начинается не с символа *)"};
+                            string warning = "Обнаружена последовательность символов не из алфавита '";
+                
+                            int line = 0;
+                            int status = 0;
+                            bool hasErrors = false;
+                
+                            int errorsCount = 0;
+                            int warnCount = 0;
+                
+                            string[] strings = StaticData.mainForm.TextBox.Text.Split('\n');
+                            for (int i = 0; i < strings.Length; i++)
+                            {
+                                strings[i] = strings[i].TrimEnd('\r');
+                            }
+                
+                            List<string> wrongSymbols = new List<string>();
+                            List<int> wrongPositions = new List<int>();
+                            Automata automata = new Automata();
+                
+                            StaticData.mainForm.ResultsTextBox.Text = "";
+                
+                            for (line = 0; line < strings.Length; line++)
+                            {
+                                status = automata.analyzeLine(strings[line], ref wrongSymbols, ref wrongPositions);
+                
+                                if(status >= 3)
+                                {
+                                    for(int j = 0; wrongSymbols.Count > j; j++)
+                                    {
+                                        warnCount++;
+                                        StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Предуп] " +
+                                            warning + wrongSymbols[j] + "'(начало с " + (wrongPositions[j] + 1) + " символа)" + Environment.NewLine;
+                                    }
+                                    status -= 3;
+                                    wrongSymbols.Clear();
+                                    wrongPositions.Clear();
+                                }
+                                if (status != 0)
+                                {
+                                    StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Ошибка] " +
+                                            errors[status] + Environment.NewLine;
+                                    hasErrors = true;
+                                    errorsCount++;
+                                }
+                
+                            }
+                
+                            StaticData.mainForm.ResultsTextBox.Text += Environment.NewLine;
+                
+                            if (warnCount > 0)
+                            {
+                                StaticData.mainForm.ResultsTextBox.Text += "Предупреждений: " + warnCount + Environment.NewLine;
+                            }
+                            if (!hasErrors)
+                            {
+                                StaticData.mainForm.ResultsTextBox.Text += "Ошибок не обнаружено" +  Environment.NewLine;
+                            }
+                            else
+                            {
+                                StaticData.mainForm.ResultsTextBox.Text += "Ошибок: " + errorsCount + Environment.NewLine;
+                            }
+                        }
+                    }
+                }
+                
+                
+            </pre>
+        </div>
     </div>
 
     <div>

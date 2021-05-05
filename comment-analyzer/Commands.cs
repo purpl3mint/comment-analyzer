@@ -9,83 +9,6 @@ namespace comment_analyzer
 {
     public class Commands
     {
-        private int checkExpression(string source)
-        {
-            
-            int state = 1;
-            int position = 1;
-
-            foreach (char symbol in source)
-            {
-                switch (state)
-                {
-                    case 1:
-                        {
-                            if (symbol == '0')
-                                state = 2;
-                            else
-                                return position;
-                            break;
-                        }
-                    case 2:
-                        {
-                            if (symbol == '1')
-                                state = 3;
-                            else
-                                return position;
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (symbol == '1')
-                                state = 4;
-                            else if (symbol == '2')
-                                state = 7;
-                            else if (symbol == '3')
-                                state = 6;
-                            else
-                                return position;
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (symbol == '2')
-                                state = 5;
-                            else
-                                return position;
-                            break;
-                        }
-                    case 5:
-                        {
-                            if (symbol == '1')
-                                state = 4;
-                            else if (symbol == '3')
-                                state = 6;
-                            else
-                                return position;
-                            break;
-                        }
-                    case 6:
-                        {
-                            if (symbol == '2')
-                                state = 6;
-                            else
-                                return position;
-                            break;
-                        }
-                    default: return -2;
-                }
-
-                position++;
-            }
-
-            if (state == 6 || state == 7)
-            {
-                return -1;
-            }
-
-            return position;
-        }
 
         public void CommandCreate()
         {
@@ -223,6 +146,9 @@ namespace comment_analyzer
             int status = 0;
             bool hasErrors = false;
 
+            int errorsCount = 0;
+            int warnCount = 0;
+
             string[] strings = StaticData.mainForm.TextBox.Text.Split('\n');
             for (int i = 0; i < strings.Length; i++)
             {
@@ -243,6 +169,7 @@ namespace comment_analyzer
                 {
                     for(int j = 0; wrongSymbols.Count > j; j++)
                     {
+                        warnCount++;
                         StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Предуп] " +
                             warning + wrongSymbols[j] + "'(начало с " + (wrongPositions[j] + 1) + " символа)" + Environment.NewLine;
                     }
@@ -255,13 +182,24 @@ namespace comment_analyzer
                     StaticData.mainForm.ResultsTextBox.Text += "Строка " + (line + 1).ToString() + ": [Ошибка] " +
                             errors[status] + Environment.NewLine;
                     hasErrors = true;
+                    errorsCount++;
                 }
 
             }
 
+            StaticData.mainForm.ResultsTextBox.Text += Environment.NewLine;
+
+            if (warnCount > 0)
+            {
+                StaticData.mainForm.ResultsTextBox.Text += "Предупреждений: " + warnCount + Environment.NewLine;
+            }
             if (!hasErrors)
             {
                 StaticData.mainForm.ResultsTextBox.Text += "Ошибок не обнаружено" +  Environment.NewLine;
+            }
+            else
+            {
+                StaticData.mainForm.ResultsTextBox.Text += "Ошибок: " + errorsCount + Environment.NewLine;
             }
         }
     }
