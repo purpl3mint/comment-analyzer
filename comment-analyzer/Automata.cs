@@ -29,6 +29,7 @@ namespace comment_analyzer
                 case '/': return true;
                 case '<': return true;
                 case '>': return true;
+                case ' ': return true;
                 default: return false;
             }
         }

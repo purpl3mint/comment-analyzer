@@ -16,5 +16,6 @@ namespace comment_analyzer
         public static Stack<string> undoStack = new Stack<string>();
         public static Stack<string> redoStack = new Stack<string>();
         public static Commands commands = new Commands();
+        public static string prePath = "";
     }
 }

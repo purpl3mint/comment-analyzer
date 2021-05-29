@@ -132,7 +132,7 @@ namespace comment_analyzer
 
         public void CommandHelp()
         {
-            Help.ShowHelp(null, "../../help/help1.html");
+            Help.ShowHelp(null, StaticData.prePath + "help/help1.html");
         }
 
         public void CommandCheck()

@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace comment_analyzer
 {
-
     public partial class CommentAnalyzerForm : Form
     {
         //wrappers for elements of form
@@ -210,42 +209,42 @@ namespace comment_analyzer
 
         private void taskToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/task.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/task.html");
         }
 
         private void grammarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/grammar.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/grammar.html");
         }
 
         private void GrammarClassToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/classification.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/classification.html");
         }
 
         private void AnalysisMethodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/analysis.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/analysis.html");
         }
 
         private void DiagnosticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/diagnostics.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/diagnostics.html");
         }
 
         private void тестовыйПримерToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/tests.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/tests.html");
         }
 
         private void LiteratureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/books.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/books.html");
         }
 
         private void SourceCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(null, "../../task/source.html");
+            Help.ShowHelp(null, StaticData.prePath + "task/source.html");
         }
     }
 
